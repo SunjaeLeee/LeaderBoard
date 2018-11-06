@@ -1,4 +1,3 @@
-const navigation = require('./navigation.js');
 module.exports = (title,body,footer) => {
     var navi = navigation;
     return `<html>

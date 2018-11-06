@@ -1,13 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const templete = require('./templete.js');
-const navigation = require('./navigation.js');
+const session = require('express-session');
+var exhbs = require('express-handlebars');
 const app = express();
-
-router.get('/',(req,res)=>{
-    console.log('index page')
-    var html = templete('index','index','index');
-    res.send(html)
+app.use(session({secret:'asdfafs', resave:true, saveUninitialized:true}));
+var sess;
+router.get('/',(req,res,next)=>{
+     sess = req.session;
+    if(sess.user){
+        res.render('index',{title:'index',footer:'index footer',sess});
+    }
+    else{
+        res.render('index',{title:'index',footer:'index footer'});
+    }
+    
+    
 });
 
 
